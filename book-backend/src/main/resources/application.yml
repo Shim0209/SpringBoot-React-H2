@@ -1,0 +1,18 @@
+server:
+  servlet:
+    encoding:
+      enabled: true
+      charset: utf-8 # 들어오는 데이터 모두 utf-8로 받겠다는 뜻.
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:booktestdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update # create, update, none
+      naming: # 꼭 해야함, 내가 적은 이름 그대로 컬럼명이 만들어 진다.
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
