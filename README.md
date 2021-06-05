@@ -1,7 +1,7 @@
 ## React-Springboot Book Project
 
 ### Springboot
-- Springboot ^2.5
+- Springboot ^2.0
 - JPA
 - MySQL(H2)
 - Maven
@@ -14,7 +14,7 @@
 - npm i styled-reset
 
 ### Project Setting
-```prettierrc
+```json
 {
     "singleQuote": true,
     "semi": true,
