@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const StyledContainerDiv = styled.div`
@@ -48,7 +49,8 @@ const StyledFormBtn = styled.button`
 `;
 
 
-const SaveForm = (props) => {
+const SaveForm = () => {
+    const {push} = useHistory();
 
     const [book, setBook] = useState({
         title:"",
@@ -80,7 +82,7 @@ const SaveForm = (props) => {
         })
         .then(res=>{ // Catch는 여기서 오류가 나야 실행됨.
             if(res !== null){
-                props.history.push("/");
+                push("/");
             } else {
                 alert("책 등록에 실패하였습니다.");
             }

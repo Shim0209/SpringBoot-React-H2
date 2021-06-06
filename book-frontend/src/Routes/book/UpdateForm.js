@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
 const StyledContainerDiv = styled.div`
     width: 100%;
@@ -50,8 +50,9 @@ const StyledFormBtn = styled.button`
     }
 `;
 
-const UpdateForm = (props) => {
-    const {id} = useParams(); 
+const UpdateForm = () => {
+    const {id} = useParams();
+    const {push} = useHistory();
 
     const [book, setBook] = useState({
         id:"",
@@ -90,7 +91,7 @@ const UpdateForm = (props) => {
         })
         .then(res=>{
             if(res !== null){
-                props.history.push("/");
+                push("/");
             } else {
                 alert("책 등록에 실패하였습니다.");
             }
@@ -114,7 +115,7 @@ const UpdateForm = (props) => {
         })
         .then(res=>{
             if(res !== null){
-                props.history.push("/");
+                push("/");
             } else {
                 alert("책 삭제에 실패하였습니다.");
             }
