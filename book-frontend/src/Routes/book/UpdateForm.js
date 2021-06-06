@@ -130,12 +130,12 @@ const UpdateForm = () => {
                 </StyledFormTitleDiv>
                 <StyledFormItemDiv>
                     <StyledFormItemTitleDiv>Title</StyledFormItemTitleDiv>
-                    <StyledFormInput type="text" placeholder={book.title} onChange={changeValue} name="title"></StyledFormInput>
+                    <StyledFormInput type="text" value={book.title} onChange={changeValue} name="title"></StyledFormInput>
                     <StyledFormItemInfoDiv></StyledFormItemInfoDiv>
                 </StyledFormItemDiv>
                 <StyledFormItemDiv>
                     <StyledFormItemTitleDiv>Author</StyledFormItemTitleDiv>
-                    <StyledFormInput type="text" placeholder={book.author} onChange={changeValue} name="author"></StyledFormInput>
+                    <StyledFormInput type="text" value={book.author} onChange={changeValue} name="author"></StyledFormInput>
                     <StyledFormItemInfoDiv></StyledFormItemInfoDiv>
                 </StyledFormItemDiv>
                 <StyledFormBtnContainerDiv>
