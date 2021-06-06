@@ -7,7 +7,7 @@ const StyledItemDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0px 0px 3px 1px black;
+    border: 1px solid tomato;
 `;
 const StyledTitleDiv = styled.div`
     font-size: 20px;
@@ -16,7 +16,7 @@ const StyledTitleDiv = styled.div`
 const BookItem = ({book}) => (
     <Link to={`/book/${book.id}`}>
         <StyledItemDiv>
-            <StyledTitleDiv>{book.title} | {book.author}</StyledTitleDiv>
+            <StyledTitleDiv>{book.title}</StyledTitleDiv>
         </StyledItemDiv>
     </Link>
 );
