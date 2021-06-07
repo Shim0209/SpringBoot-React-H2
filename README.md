@@ -6,6 +6,8 @@
 - MySQL(H2)
 - Maven
 - Lombok
+- AOP 2.4.5
+- Validation
 
 ### React
 - npm i react-router-dom
