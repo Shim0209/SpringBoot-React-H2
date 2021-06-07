@@ -1,11 +1,17 @@
 package com.react_springboot.book.web;
 
 import com.react_springboot.book.domain.Book;
+import com.react_springboot.book.domain.BookSaveDto;
+import com.react_springboot.book.domain.BookUpdateDto;
+import com.react_springboot.book.domain.CommonDto;
 import com.react_springboot.book.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,27 +23,32 @@ public class BookController {
     // security(라이브러리 적용) - CORS 정책을 가지고 있음. (따라서 시큐리티의 CORS를 해제시켜야함)
     // BookController 진입 직전
     @PostMapping("/book")
-    public ResponseEntity<?> save(@RequestBody Book book){ //@RequestBody를 걸면 Json으로 받는다.
-        return new ResponseEntity<>(bookService.저장하기(book), HttpStatus.CREATED); // 201
+    public CommonDto<?> save(@Valid @RequestBody BookSaveDto dto, BindingResult bindingResult){ //@RequestBody를 걸면 Json으로 받는다.
+        Book book = new Book(dto.getTitle(), dto.getAuthor());
+        bookService.저장하기(book);
+        return new CommonDto<>(HttpStatus.CREATED.value(), "ok");
     }
 
     @GetMapping("/book")
-    public ResponseEntity<?> findAll(){
-        return new ResponseEntity<>(bookService.모두가져오기(), HttpStatus.OK); // 200
+    public CommonDto<List<Book>> findAll(){
+        return new CommonDto<>(HttpStatus.OK.value(), bookService.모두가져오기());
     }
 
     @GetMapping("/book/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
-        return new ResponseEntity<>(bookService.한건가져오기(id), HttpStatus.OK); // 200
+    public CommonDto<Book> findById(@PathVariable Long id){
+        return new CommonDto<>(HttpStatus.OK.value(), bookService.한건가져오기(id));
     }
 
     @PutMapping("/book/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Book book){
-        return new ResponseEntity<>(bookService.수정하기(id, book), HttpStatus.OK); // 200
+    public CommonDto<?> update(@PathVariable Long id,@Valid @RequestBody BookUpdateDto dto, BindingResult bindingResult){
+        Book book = new Book(dto.getTitle(), dto.getAuthor());
+        bookService.수정하기(id, book);
+        return new CommonDto(HttpStatus.OK.value(), "ok");
     }
 
     @DeleteMapping("/book/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Long id){
-        return new ResponseEntity<>(bookService.삭제하기(id), HttpStatus.OK); // 200
+    public CommonDto deleteById(@PathVariable Long id){
+        bookService.삭제하기(id);
+        return new CommonDto(HttpStatus.OK.value());
     }
 }

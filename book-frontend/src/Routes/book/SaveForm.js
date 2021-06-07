@@ -57,6 +57,11 @@ const SaveForm = () => {
         author:"",
     });
 
+    const [message, setMessage] = useState({
+        title:"",
+        author:"",
+    });
+
     const changeValue = (e) => {
         setBook({
             ...book,
@@ -73,23 +78,14 @@ const SaveForm = () => {
             },
             body:JSON.stringify(book)
         })
+        .then(res=>res.json())
         .then(res=>{
-            if(res.status === 201) {
-                return res.json();
+            if(res.statusCode == 201){
+                push("/")
             } else {
-                return null;
-            }
-        })
-        .then(res=>{ // Catch는 여기서 오류가 나야 실행됨.
-            if(res !== null){
-                push("/");
-            } else {
-                alert("책 등록에 실패하였습니다.");
+                setMessage(res.data)
             }
         });
-        // .catch((error)=>{
-        //     console.log(error);
-        // })   
     }
 
 
@@ -102,12 +98,12 @@ const SaveForm = () => {
                 <StyledFormItemDiv>
                     <StyledFormItemTitleDiv>Title</StyledFormItemTitleDiv>
                     <StyledFormInput type="text" placeholder="도서 제목 입력란" onChange={changeValue} name="title"></StyledFormInput>
-                    <StyledFormItemInfoDiv>경고 메세지 출력란</StyledFormItemInfoDiv>
+                    <StyledFormItemInfoDiv>{message.title}</StyledFormItemInfoDiv>
                 </StyledFormItemDiv>
                 <StyledFormItemDiv>
                     <StyledFormItemTitleDiv>Author</StyledFormItemTitleDiv>
                     <StyledFormInput type="text" placeholder="도서 작가 입력란" onChange={changeValue} name="author"></StyledFormInput>
-                    <StyledFormItemInfoDiv>경고 메세지 출력란</StyledFormItemInfoDiv>
+                    <StyledFormItemInfoDiv>{message.author}</StyledFormItemInfoDiv>
                 </StyledFormItemDiv>
                 <StyledFormBtn type="submit">
                     등록

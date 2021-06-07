@@ -60,9 +60,16 @@ const UpdateForm = () => {
         author:"",
     });
 
+    const [message, setMessage] = useState({
+        title:"",
+        author:"",
+    })
+
     useEffect(()=>{
         fetch(`http://localhost:8080/book/${id}`).then(res=>res.json()).then(res=>{
-            setBook(res)
+            if(res.statusCode === 200) {
+                setBook(res.data)
+            }
         }); 
     }, [])
 
@@ -82,18 +89,12 @@ const UpdateForm = () => {
             },
             body:JSON.stringify(book)
         })
+        .then(res=>res.json())
         .then(res=>{
-            if(res.status === 200) {
-                return res.json();
+            if(res.statusCode === 200){
+                push("/")
             } else {
-                return null;
-            }
-        })
-        .then(res=>{
-            if(res !== null){
-                push("/");
-            } else {
-                alert("책 등록에 실패하였습니다.");
+                setMessage(res.data)
             }
         }); 
     }
@@ -106,15 +107,10 @@ const UpdateForm = () => {
                 "Content-Type":"application/json; charset=utf-8"
             }
         })
+        .then(res=>res.json())
         .then(res=>{
-            if(res.status === 200) {
-                return res;
-            } else {
-                return null;
-            }
-        })
-        .then(res=>{
-            if(res !== null){
+            console.log('delete',res);
+            if(res.statusCode === 200){
                 push("/");
             } else {
                 alert("책 삭제에 실패하였습니다.");
@@ -131,12 +127,12 @@ const UpdateForm = () => {
                 <StyledFormItemDiv>
                     <StyledFormItemTitleDiv>Title</StyledFormItemTitleDiv>
                     <StyledFormInput type="text" value={book.title} onChange={changeValue} name="title"></StyledFormInput>
-                    <StyledFormItemInfoDiv></StyledFormItemInfoDiv>
+                    <StyledFormItemInfoDiv>{message.title}</StyledFormItemInfoDiv>
                 </StyledFormItemDiv>
                 <StyledFormItemDiv>
                     <StyledFormItemTitleDiv>Author</StyledFormItemTitleDiv>
                     <StyledFormInput type="text" value={book.author} onChange={changeValue} name="author"></StyledFormInput>
-                    <StyledFormItemInfoDiv></StyledFormItemInfoDiv>
+                    <StyledFormItemInfoDiv>{message.author}</StyledFormItemInfoDiv>
                 </StyledFormItemDiv>
                 <StyledFormBtnContainerDiv>
                     <StyledFormBtn type="submit">

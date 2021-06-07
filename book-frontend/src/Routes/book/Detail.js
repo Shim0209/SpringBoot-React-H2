@@ -12,7 +12,9 @@ const Detail = () => {
 
     useEffect(()=>{
         fetch(`http://localhost:8080/book/${id}`).then(res=>res.json()).then(res=>{
-            setBook(res)
+            if(res.statusCode === 200) {
+                setBook(res.data)
+            }
         }); 
     }, [])
 

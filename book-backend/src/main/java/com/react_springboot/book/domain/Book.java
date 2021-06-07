@@ -22,8 +22,12 @@ public class Book {
     private String title;
     private String author;
 
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
 
-//    // 아름다운 코딩 형태
+    //    // 아름다운 코딩 형태
 //    // @Getter만 생성, @Setter는 만들지 않는다.
 //    // 함수를 통해서 set해준다.
 //    public static setBook(Dto dto){

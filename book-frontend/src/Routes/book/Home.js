@@ -18,7 +18,9 @@ const Home = () => {
         // 첫번째 then()은 빈 상태를 주고, 요청 데이터를 받아오면 두번째 then()에서 빈 상태속에 값을 넣어준다.
         // 첫번째 then(응답이오면 json으로 바꿔준다.), 두번째 then(값을 받아옴)
         fetch("http://localhost:8080/book").then(res=>res.json()).then(res=>{
-            setBooks(res)
+            if(res.statusCode === 200){
+                setBooks(res.data);
+            }
         }); 
     }, [])
 
