@@ -12,9 +12,6 @@ import org.springframework.validation.FieldError;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 유효성검사 AOP
- */
 @Aspect
 @Component
 public class BindingAdvice {
