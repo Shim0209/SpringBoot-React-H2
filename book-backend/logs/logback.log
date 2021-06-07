@@ -1,0 +1,4 @@
+[2021-06-08 02:32:47:21392][http-nio-8080-exec-2] WARN  c.r.book.config.BindingAdvice - com.react_springboot.book.web.BookController.save() => 필드 : author, 메시지 : 도서 저자를 입력하세요.
+[2021-06-08 02:32:47:21393][http-nio-8080-exec-2] WARN  c.r.book.config.BindingAdvice - com.react_springboot.book.web.BookController.save() => 필드 : title, 메시지 : 도서 제목을 입력하세요.
+[2021-06-08 02:40:17:25773][http-nio-8080-exec-1] WARN  c.r.book.config.BindingAdvice - com.react_springboot.book.web.BookController.save() => 필드 : title, 메시지 : 도서 제목을 입력하세요.
+[2021-06-08 02:40:17:25773][http-nio-8080-exec-1] WARN  c.r.book.config.BindingAdvice - com.react_springboot.book.web.BookController.save() => 필드 : author, 메시지 : 도서 저자를 입력하세요.
